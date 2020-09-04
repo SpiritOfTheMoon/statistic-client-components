@@ -1,0 +1,15 @@
+.FooterTablePagination {
+    & > &-TextField {
+        width: 40px;
+        .ms-TextField-field {
+            text-align: center;
+        }
+    }
+    & > &-Label {
+        width: 40px;
+        text-align: center;
+        border-width: 20px;
+    }
+    align-items: center;
+    justify-content: flex-end;
+}
