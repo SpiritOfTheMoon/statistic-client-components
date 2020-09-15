@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Stack, DefaultButton, TextField, Label } from "@fluentui/react";
-import '../../styles/FooterTablePagination.scss';
+import '../../styles/FooterTablePagination.less';
 
 export type FooterTablePaginationProps = {
     totalCount: number;
