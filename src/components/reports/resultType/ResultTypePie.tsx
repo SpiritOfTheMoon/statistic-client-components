@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import {
   ResultTypeReportFragmentTypes,
 
-} from "@umk/statistic-client-relay";
+} from "@umk-stat/statistic-client-relay";
 import { Group } from "@vx/group";
 import { Pie } from "@vx/shape";
 import { AnimatedPie } from "../../baseComponents/AnimatedPie";

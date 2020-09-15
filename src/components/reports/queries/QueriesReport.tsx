@@ -2,7 +2,7 @@ import React from "react";
 import {
     useSystemQueriesReport,
 
-} from "@umk/statistic-client-relay";
+} from "@umk-stat/statistic-client-relay";
 import { QueriesReportTable } from "./QueriesReportTable";
 
 

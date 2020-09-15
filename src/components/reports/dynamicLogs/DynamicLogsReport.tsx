@@ -1,5 +1,5 @@
 import React from "react";
-import { useBackendLogSubscription, useSystemDynamicTableLogs } from "@umk/statistic-client-relay";
+import { useBackendLogSubscription, useSystemDynamicTableLogs } from "@umk-stat/statistic-client-relay";
 import { DynamicLogsTable } from "./DynamicLogsTable";
 
 

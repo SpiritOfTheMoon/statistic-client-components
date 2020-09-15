@@ -5,7 +5,7 @@ import {
   TableLogsFragmentTypes,
   SystemDynamicTableLogsQueryTypes,
 
-} from "@umk/statistic-client-relay";
+} from "@umk-stat/statistic-client-relay";
 
 import { CodeTextProps } from "../../baseComponents/CodeText";
 import stringify from "json-stringify-pretty-compact";

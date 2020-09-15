@@ -1,4 +1,4 @@
-import { SystemDynamicTableLogsQueryResponse } from "@umk/statistic-client-relay/dist/queries/__generated__/SystemDynamicTableLogsQuery.graphql";
+import { SystemDynamicTableLogsQueryResponse } from "@umk-stat/statistic-client-relay/dist/queries/__generated__/SystemDynamicTableLogsQuery.graphql";
 
 export function useSystemDynamicTableLogs(): SystemDynamicTableLogsQueryResponse {
     return {

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { initializeIcons } from "@uifabric/icons";
 import { Menu } from "./Menu";
 import { Dropdown, IDropdownOption } from "@fluentui/react";
-import { useSystems } from "@umk/statistic-client-relay";
+import { useSystems } from "@umk-stat/statistic-client-relay";
 
 export type SystemProps = {
     systemId: string;

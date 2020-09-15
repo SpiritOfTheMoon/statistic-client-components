@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { PeriodDateTimePicker } from "../../baseComponents/PeriodDateTimePicker";
 import { DayOfWeek, IDatePickerStrings, Dropdown, IDropdownOption, Stack } from "@fluentui/react";
-import { QueriesIntervalReportRefetchableQueryTypes } from "@umk/statistic-client-relay";
+import { QueriesIntervalReportRefetchableQueryTypes } from "@umk-stat/statistic-client-relay";
 
 enum Datepart {
 

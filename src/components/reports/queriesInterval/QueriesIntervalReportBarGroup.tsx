@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { QueriesIntervalReportFragmentTypes } from "@umk/statistic-client-relay";
+import { QueriesIntervalReportFragmentTypes } from "@umk-stat/statistic-client-relay";
 import { QueriesIntervalOptions } from "./QueriesIntervalOptions";
 import { Group } from "@vx/group";
 import { scaleBand, scaleLinear, scaleOrdinal } from '@vx/scale';

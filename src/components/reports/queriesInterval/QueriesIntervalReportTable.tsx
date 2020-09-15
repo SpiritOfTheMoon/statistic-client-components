@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { QueriesIntervalReportFragmentTypes } from "@umk/statistic-client-relay";
+import { QueriesIntervalReportFragmentTypes } from "@umk-stat/statistic-client-relay";
 import { useState } from "react";
 import { CodeTextProps, CodeModal, HiddenText } from "../../baseComponents";
 import { IColumn, DetailsList, IGroup, CheckboxVisibility, SelectionMode } from "@fluentui/react";

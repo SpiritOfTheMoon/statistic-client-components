@@ -1,5 +1,5 @@
 import React from "react";
-import { useSystemResultTypeReport } from "@umk/statistic-client-relay";
+import { useSystemResultTypeReport } from "@umk-stat/statistic-client-relay";
 import { ResultTypeView } from "./ResultTypeView";
 
 export type ResultTypeReportProps = {

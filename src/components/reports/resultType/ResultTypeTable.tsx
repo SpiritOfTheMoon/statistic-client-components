@@ -3,7 +3,7 @@ import { DetailsList, CheckboxVisibility } from "@fluentui/react";
 import {
   ResultTypeReportFragmentTypes,
 
-} from "@umk/statistic-client-relay";
+} from "@umk-stat/statistic-client-relay";
 
 
 

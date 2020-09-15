@@ -5,7 +5,7 @@ import {
   QueriesReportFragmentTypes,
   SystemQueriesReportQueryTypes,
 
-} from "@umk/statistic-client-relay";
+} from "@umk-stat/statistic-client-relay";
 import { PeriodDatePicker, CodeModal, CodeTextProps, HiddenText } from "../../baseComponents";
 
 const DayPickerStrings: IDatePickerStrings = {

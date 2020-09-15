@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useResultTypeReport, SystemResultTypeReportQueryTypes } from "@umk/statistic-client-relay";
+import { useResultTypeReport, SystemResultTypeReportQueryTypes } from "@umk-stat/statistic-client-relay";
 import { DefaultButton, OverflowSet, CommandBarButton, IOverflowSetItemProps } from "@fluentui/react";
 import { ResultTypeOption, ResultTypeOptions } from "./ResultTypeOption";
 import { ResultTypeTable } from "./ResultTypeTable";

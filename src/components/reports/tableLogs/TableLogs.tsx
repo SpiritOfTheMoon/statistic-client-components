@@ -4,8 +4,8 @@ import {
     useTableLogs,
     TableLogsFragmentTypes,
     SystemTableLogsQueryTypes
-} from "@umk/statistic-client-relay";
-import { TableLogsFragment } from "@umk/statistic-client-relay/dist/queries/__generated__/TableLogsFragment.graphql";
+} from "@umk-stat/statistic-client-relay";
+import { TableLogsFragment } from "@umk-stat/statistic-client-relay/dist/fragments/__generated__/TableLogsFragment.graphql";
 import { CodeTextProps } from "../../baseComponents/CodeText";
 import stringify from "json-stringify-pretty-compact";
 import { CodeModal } from "../../baseComponents/CodeModal";

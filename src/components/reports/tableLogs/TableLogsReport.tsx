@@ -1,6 +1,6 @@
 import { TableLogs } from "./TableLogs";
 import React from "react";
-import { useSystemTableLogs } from "@umk/statistic-client-relay";
+import { useSystemTableLogs } from "@umk-stat/statistic-client-relay";
 
 export type TableLogsReportProps = {
     systemId: string;

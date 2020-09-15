@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { QueriesIntervalOptions } from "./QueriesIntervalOptions";
-import { useQueriesIntervalReport, SystemQueriesIntervalReportQueryTypes } from "@umk/statistic-client-relay";
+import { useQueriesIntervalReport, SystemQueriesIntervalReportQueryTypes } from "@umk-stat/statistic-client-relay";
 import { QueriesIntervalReportTable } from "./QueriesIntervalReportTable";
 import { DefaultButton, OverflowSet, CommandBarButton, IOverflowSetItemProps } from "@fluentui/react";
 import { QueriesIntervalReportBarGroup } from "./QueriesIntervalReportBarGroup";
