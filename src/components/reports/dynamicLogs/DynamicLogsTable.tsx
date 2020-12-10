@@ -94,27 +94,6 @@ export function DynamicLogsTable({ system }: DynamicLogsTableProps): JSX.Element
           },
           {
             key: 'column4',
-            name: 'result',
-            className: "CellResult",
-            fieldName: 'result',
-            minWidth: 400,
-            maxWidth: 600,
-            data: "string",
-            isPadded: true,
-            onRender: (item: IDocument) => {
-              const onClick = () => {
-                const res = stringify(JSON.parse(item.result));
-                setCodeText({
-                  language: 'json',
-                  text: res,
-                });
-                setVisibleModal(true);
-              };
-              return <HiddenText onClick={onClick} fullText={item.result} />
-            },
-          },
-          {
-            key: 'column5',
             name: 'perfomance',
             className: "CellPerfomance",
             fieldName: 'perfomance',
@@ -123,7 +102,7 @@ export function DynamicLogsTable({ system }: DynamicLogsTableProps): JSX.Element
             data: "number",
           },
           {
-            key: 'column6',
+            key: 'column5',
             name: 'resultType',
             className: "CellResultType",
             fieldName: 'resultType',

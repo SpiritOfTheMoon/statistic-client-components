@@ -127,27 +127,6 @@ export function TableLogs({ system }: TableLogsProps): JSX.Element {
                     },
                     {
                         key: 'column5',
-                        name: 'result',
-                        className: "CellResult",
-                        fieldName: 'result',
-                        minWidth: 400,
-                        maxWidth: 600,
-                        data: "string",
-                        isPadded: true,
-                        onRender: (item: IDocument) => {
-                            const onClick = () => {
-                                const res = stringify(JSON.parse(item.result));
-                                setCodeText({
-                                    language: 'json',
-                                    text: res,
-                                });
-                                setVisibleModal(true);
-                            };
-                            return <HiddenText onClick={onClick} fullText={item.result} />
-                        },
-                    },
-                    {
-                        key: 'column6',
                         name: 'perfomance',
                         className: "CellPerfomance",
                         fieldName: 'perfomance',
@@ -156,7 +135,7 @@ export function TableLogs({ system }: TableLogsProps): JSX.Element {
                         data: "number",
                     },
                     {
-                        key: 'column7',
+                        key: 'column6',
                         name: 'resultType',
                         className: "CellResultType",
                         fieldName: 'resultType',
