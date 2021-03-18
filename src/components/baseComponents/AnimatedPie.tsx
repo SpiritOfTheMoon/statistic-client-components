@@ -47,7 +47,7 @@ export function AnimatedPie<Datum>({
             leave: animate ? fromLeaveTransition : enterUpdateTransition,
             config: {
                 duration: 1000,
-            }
+            },
         },
     );
     return (
@@ -69,27 +69,25 @@ export function AnimatedPie<Datum>({
                         <g key={key}>
                             <animated.path
                                 // compute interpolated path d attribute from intermediate angle values
-                                d={interpolate([props.startAngle, props.endAngle], (startAngle, endAngle) =>
-                                    path({
+                              d={interpolate([props.startAngle, props.endAngle], (startAngle, endAngle) => path({
                                         ...arc,
                                         startAngle,
                                         endAngle,
-                                    }),
-                                )}
-                                fill={getColor(arc)}
-                                onClick={() => onClickDatum(arc)}
-                                onTouchStart={() => onClickDatum(arc)}
+                                    }))}
+                              fill={getColor(arc)}
+                              onClick={() => onClickDatum(arc)}
+                              onTouchStart={() => onClickDatum(arc)}
                             />
                             {hasSpaceForLabel && (
                                 <animated.g style={{ opacity: props.opacity }}>
                                     <text
-                                        fill="white"
-                                        x={centroidX}
-                                        y={centroidY}
-                                        dy=".33em"
-                                        fontSize={14}
-                                        textAnchor="middle"
-                                        pointerEvents="none"
+                                      fill="white"
+                                      x={centroidX}
+                                      y={centroidY}
+                                      dy=".33em"
+                                      fontSize={14}
+                                      textAnchor="middle"
+                                      pointerEvents="none"
                                     >
                                         {getVisibleValue(arc)}
                                     </text>

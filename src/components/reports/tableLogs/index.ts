@@ -1,2 +1,2 @@
-export * from "./TableLogs";
-export * from "./TableLogsReport";
+export * from './TableLogs';
+export * from './TableLogsReport';

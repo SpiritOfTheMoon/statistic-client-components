@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { PeriodDatePicker } from "../../baseComponents";
-import { IDatePickerStrings, DayOfWeek } from "@fluentui/react";
+import React, { useState, useEffect } from 'react';
+import { IDatePickerStrings, DayOfWeek } from '@fluentui/react';
+import { PeriodDatePicker } from '../../baseComponents';
 
 export type ResultTypeOptions = {
 
@@ -10,7 +10,6 @@ export type ResultTypeOptions = {
 export type ResultTypeOptionProps = {
     onSelectedOptions?: (options: ResultTypeOptions | undefined) => void;
 };
-
 
 const DayPickerStrings: IDatePickerStrings = {
     months: [
@@ -51,31 +50,28 @@ const firstDayOfWeek = DayOfWeek.Sunday;
 export function ResultTypeOption({
     onSelectedOptions,
 }: ResultTypeOptionProps): JSX.Element {
-
     const [options, setOptions] = useState<ResultTypeOptions | undefined>(undefined);
     const onSelectDate = (dates: [Date | null | undefined, Date | null | undefined]) => {
-
         setOptions({
             fromDate: dates[0] === null ? undefined : dates[0],
             toDate: dates[1] === null ? undefined : dates[1],
         });
-
-    }
+    };
     useEffect(() => {
-        onSelectedOptions && onSelectedOptions(options);
+        onSelectedOptions?.(options);
     }, [options]);
     return (
         <>
             <PeriodDatePicker
-                placeholders={["СТАРТ ПЕРИОДА", "КОНЕЦ ПЕРИОДА"]}
-                orientation="horizontal"
-                className="ResultTypeReportOptions-DatePicker"
-                allowTextInput={true}
-                firstDayOfWeek={firstDayOfWeek}
-                strings={DayPickerStrings}
-                value={[options?.fromDate, options?.toDate]}
-                onSelectDate={onSelectDate} />
+              placeholders={['СТАРТ ПЕРИОДА', 'КОНЕЦ ПЕРИОДА']}
+              orientation="horizontal"
+              className="ResultTypeReportOptions-DatePicker"
+              allowTextInput={true}
+              firstDayOfWeek={firstDayOfWeek}
+              strings={DayPickerStrings}
+              value={[options?.fromDate, options?.toDate]}
+              onSelectDate={onSelectDate}
+            />
         </>
     );
-
-} 
+}

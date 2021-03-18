@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { PeriodDateTimePicker } from "../../baseComponents/PeriodDateTimePicker";
-import { DayOfWeek, IDatePickerStrings, Dropdown, IDropdownOption, Stack } from "@fluentui/react";
-import { QueriesIntervalReportRefetchableQueryTypes } from "@umk-stat/statistic-client-relay";
+import React, { useState, useEffect } from 'react';
+import {
+    DayOfWeek, IDatePickerStrings, Dropdown, IDropdownOption, Stack,
+} from '@fluentui/react';
+import { QueriesIntervalReportRefetchableQueryTypes } from '@umk-stat/statistic-client-relay';
+import { PeriodDateTimePicker } from '../../baseComponents/PeriodDateTimePicker';
 
 enum Datepart {
 
-    minute = "minute",
-    hour = "hour",
-    day = "day",
-    month = "month",
-    year = "year",
+    minute = 'minute',
+    hour = 'hour',
+    day = 'day',
+    month = 'month',
+    year = 'year',
 
 }
 
@@ -49,8 +51,7 @@ const DayPickerStrings: IDatePickerStrings = {
 
 const firstDayOfWeek = DayOfWeek.Sunday;
 
-
-export type QueriesIntervalOptions = {
+export type QueriesIntervalOptionsType = {
 
     fromDate: Date | undefined;
     toDate: Date | undefined;
@@ -58,51 +59,47 @@ export type QueriesIntervalOptions = {
 };
 
 export type QueriesIntervalOptionsProps = {
-    onSelectedOptions?: (options: QueriesIntervalOptions) => void;
+    onSelectedOptions?: (options: QueriesIntervalOptionsType) => void;
 };
 
 export function QueriesIntervalOptions({ onSelectedOptions }: QueriesIntervalOptionsProps): JSX.Element {
-
-    const dropDownOptions: IDropdownOption[] = Object.keys(Datepart).map((key) => {
-        return Datepart[key as (keyof typeof Datepart)];
-    }).map<IDropdownOption>((val) => ({
-        key: val,
-        text: val,
-    }));
+    const dropDownOptions: IDropdownOption[] = Object.keys(Datepart)
+        .map((key) => Datepart[key as (keyof typeof Datepart)])
+        .map<IDropdownOption>((val) => ({
+            key: val,
+            text: val,
+        }));
 
     // const [interval, setInterv] = useState<Datepart>(Datepart.day);
-    const [options, setOptions] = useState<QueriesIntervalOptions>({
+    const [options, setOptions] = useState<QueriesIntervalOptionsType>({
         fromDate: undefined,
         interval: 'day',
         toDate: undefined,
     });
 
     useEffect(() => {
-        onSelectedOptions && onSelectedOptions(options);
+        onSelectedOptions?.(options);
     }, [options]);
 
     const calendarProps = {
         allowTextInput: true,
-        firstDayOfWeek: firstDayOfWeek,
+        firstDayOfWeek,
         strings: DayPickerStrings,
-    }
-
+    };
 
     const onSelectedDate = ([fromDate, toDate]: [Date | undefined, Date | undefined]) => {
-
-        const newOptions: QueriesIntervalOptions = {
+        const newOptions: QueriesIntervalOptionsType = {
             fromDate,
             toDate,
             interval: options.interval,
         };
         setOptions(newOptions);
-
     };
 
     const onSelctedInterval = (_: React.FormEvent<HTMLDivElement>, option?: IDropdownOption) => {
         if (typeof option !== 'undefined') {
             const interval = option.key as Datepart ?? Datepart.day;
-            setOptions({ ...options, interval, });
+            setOptions({ ...options, interval });
         }
     };
 
@@ -110,8 +107,8 @@ export function QueriesIntervalOptions({ onSelectedOptions }: QueriesIntervalOpt
         <React.Suspense fallback="отчет загружается">
             <Stack horizontal={true}>
                 <PeriodDateTimePicker calendarProps={calendarProps} onSelectPeriodDateTime={onSelectedDate} />
-                <Dropdown dropdownWidth={200} options={dropDownOptions} onChange={onSelctedInterval} ></Dropdown>
+                <Dropdown dropdownWidth={200} options={dropDownOptions} onChange={onSelctedInterval} />
             </Stack>
-        </React.Suspense>);
-
+        </React.Suspense>
+    );
 }

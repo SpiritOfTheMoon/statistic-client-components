@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { initializeIcons } from "@uifabric/icons";
-import { Menu } from "./Menu";
-import { Dropdown, IDropdownOption } from "@fluentui/react";
-import { useSystems } from "@umk-stat/statistic-client-relay";
+import React, { useState } from 'react';
+import { initializeIcons } from '@uifabric/icons';
+import { Dropdown, IDropdownOption } from '@fluentui/react';
+import { useSystems } from '@umk-stat/statistic-client-relay';
+import { Menu } from './Menu';
 
 export type SystemProps = {
     systemId: string;
@@ -10,12 +10,10 @@ export type SystemProps = {
 
 export function System(): JSX.Element {
     initializeIcons();
-    const { systems } = useSystems({ fetchPolicy: "store-and-network" }, {});
+    const { systems } = useSystems({ fetchPolicy: 'store-and-network' }, {});
 
     if (systems.length === 0) {
-
-        throw new Error("Нет систем, создайте системы");
-
+        throw new Error('Нет систем, создайте системы');
     }
 
     const [systemId, setSystemId] = useState<string>(systems[0].id);
@@ -28,9 +26,8 @@ export function System(): JSX.Element {
     }));
     return (
         <div>
-            <Dropdown options={options} onChange={onChange} placeholder={"Выберите систему"} defaultSelectedKey={systemId} />
-            <Menu systemId={systemId}></Menu>
+            <Dropdown options={options} onChange={onChange} placeholder="Выберите систему" defaultSelectedKey={systemId} />
+            <Menu systemId={systemId} />
         </div>
     );
-
 }

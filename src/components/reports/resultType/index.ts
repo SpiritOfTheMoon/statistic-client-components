@@ -1,3 +1,3 @@
-export * from "./ResultTypeReport";
-export * from "./ResultTypeTable";
-export * from "./ResultTypeOption";
+export * from './ResultTypeReport';
+export * from './ResultTypeTable';
+export * from './ResultTypeOption';

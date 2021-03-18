@@ -1,22 +1,17 @@
-import React from "react";
-import { DetailsList, CheckboxVisibility } from "@fluentui/react";
+import React from 'react';
+import { DetailsList, CheckboxVisibility } from '@fluentui/react';
 import {
   ResultTypeReportFragmentTypes,
 
-} from "@umk-stat/statistic-client-relay";
-
-
-
+} from '@umk-stat/statistic-client-relay';
 
 export type ResultTypeTableProps = {
-  data: ResultTypeReportFragmentTypes.ResultTypeReportFragment["resultTypeReport"];
+  data: ResultTypeReportFragmentTypes.ResultTypeReportFragment['resultTypeReport'];
 };
 
-type IDocument = ResultTypeReportFragmentTypes.ResultTypeReportFragment["resultTypeReport"][0];
+type IDocument = ResultTypeReportFragmentTypes.ResultTypeReportFragment['resultTypeReport'][0];
 
 export function ResultTypeTable({ data }: ResultTypeTableProps): JSX.Element {
-
-
   return (
     <>
       <DetailsList
@@ -33,27 +28,24 @@ export function ResultTypeTable({ data }: ResultTypeTableProps): JSX.Element {
           {
             key: 'column1',
             name: 'Тип результата',
-            className: "CellName",
+            className: 'CellName',
             fieldName: 'name',
             minWidth: 200,
             maxWidth: 300,
-            data: "string",
+            data: 'string',
           },
           {
             key: 'column2',
             name: 'Количество',
-            className: "CellCount",
+            className: 'CellCount',
             fieldName: 'count',
             minWidth: 150,
             isPadded: true,
-            data: "number",
-          }
+            data: 'number',
+          },
         ]}
-      >
-      </DetailsList>
-
+      />
 
     </>
   );
-
 }

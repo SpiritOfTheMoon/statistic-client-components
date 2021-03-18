@@ -1,29 +1,28 @@
-import React from "react";
-import {
-    useSystemQueriesIntervalReport,
+// import React from "react";
+// import {
+//     useSystemQueriesIntervalReport,
 
-} from "@umk-stat/statistic-client-relay";
-import { QueriesIntervalReportView } from "./QueriesIntervalReportView";
+// } from "@umk-stat/statistic-client-relay";
+// import { QueriesIntervalReportView } from "./QueriesIntervalReportView";
 
-export type QueriesIntervalReportProps = {
-    systemId: string;
-};
+// export type QueriesIntervalReportProps = {
+//     systemId: string;
+// };
 
+// export function QueriesIntervalReport({ systemId }: QueriesIntervalReportProps): JSX.Element {
 
-export function QueriesIntervalReport({ systemId }: QueriesIntervalReportProps): JSX.Element {
+//     const { system } = useSystemQueriesIntervalReport({
+//         fetchPolicy: "store-and-network",
+//     }, {
+//         systemId,
+//     });
 
-    const { system } = useSystemQueriesIntervalReport({
-        fetchPolicy: "store-and-network",
-    }, {
-        systemId,
-    });
+//     if (system === null) {
+//         throw new Error("Нет системы");
+//     }
 
-    if (system === null) {
-        throw new Error("Нет системы");
-    }
+//     return (
+//         <QueriesIntervalReportView system={system} />
+//     );
 
-    return (
-        <QueriesIntervalReportView system={system} />
-    );
-
-}
+// }

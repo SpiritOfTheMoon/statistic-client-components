@@ -1,2 +1,2 @@
-export * from "./DynamicLogsReport";
-export * from "./DynamicLogsTable";
+export * from './DynamicLogsReport';
+export * from './DynamicLogsTable';

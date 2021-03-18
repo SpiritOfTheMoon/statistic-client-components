@@ -1,2 +1,2 @@
-export * from "./QueriesReport";
-export * from "./QueriesReportTable";
+// export * from "./QueriesReport";
+// export * from "./QueriesReportTable";

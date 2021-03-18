@@ -1,24 +1,26 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   ResultTypeReportFragmentTypes,
 
-} from "@umk-stat/statistic-client-relay";
-import { Group } from "@vx/group";
-import { Pie } from "@vx/shape";
-import { AnimatedPie } from "../../baseComponents/AnimatedPie";
-import { scaleOrdinal } from "@vx/scale";
+} from '@umk-stat/statistic-client-relay';
+import { Group } from '@vx/group';
+import { Pie } from '@vx/shape';
+import { scaleOrdinal } from '@vx/scale';
 import { GradientPinkBlue } from '@vx/gradient';
+import { AnimatedPie } from '../../baseComponents/AnimatedPie';
 
-const defaultMargin = { top: 20, right: 20, bottom: 20, left: 20 };
+const defaultMargin = {
+ top: 20, right: 20, bottom: 20, left: 20,
+};
 
 export type ResultTypePieProps = {
-  data: ResultTypeReportFragmentTypes.ResultTypeReportFragment["resultTypeReport"];
+  data: ResultTypeReportFragmentTypes.ResultTypeReportFragment['resultTypeReport'];
   margin?: typeof defaultMargin,
   animate?: boolean,
   width?: number,
   height?: number,
 };
-type DataType = ResultTypeReportFragmentTypes.ResultTypeReportFragment["resultTypeReport"][0];
+type DataType = ResultTypeReportFragmentTypes.ResultTypeReportFragment['resultTypeReport'][0];
 
 export function ResultTypePie({
   data,
@@ -64,17 +66,15 @@ export function ResultTypePie({
           cornerRadius={3}
           padAngle={0.005}
         >
-          {pie => (
+          {(pie) => (
             <AnimatedPie<DataType>
               {...pie}
               animate={animate}
-              getKey={arc => arc.data.name}
-              onClickDatum={({ data: { name } }) =>
-                animate &&
-                setSelectedType(selectedType && selectedType === name ? null : name)
-              }
-              getColor={arc => getBrowserColor(arc.data.name)}
-              getVisibleValue={arc => `${arc.data.name}: ${arc.data.count}`}
+              getKey={(arc) => arc.data.name}
+              onClickDatum={({ data: { name } }) => animate
+                && setSelectedType(selectedType && selectedType === name ? null : name)}
+              getColor={(arc) => getBrowserColor(arc.data.name)}
+              getVisibleValue={(arc) => `${arc.data.name}: ${arc.data.count}`}
             />
           )}
         </Pie>
