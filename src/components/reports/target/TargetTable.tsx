@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useState } from 'react';
 import {
   DetailsList, CheckboxVisibility, mergeStyleSets, DefaultButton, DialogType,
@@ -6,7 +7,7 @@ import {
   SystemTargetsQueryTypes,
   useTargetsFragment,
 } from '@umk-stat/statistic-client-relay';
-import { CreateTargetDialog } from '@umk-stat/statistic-client-modals';
+import { CreateTargetDialog, TargetEventsModal } from '@umk-stat/statistic-client-modals';
 import 'office-ui-fabric-react/dist/css/fabric.css';
 
 export type TableTargetProps = {
@@ -23,6 +24,8 @@ export function TargetTable({ system }: TableTargetProps): JSX.Element {
   });
 
   const [dialogHidden, setDialogHidden] = useState(true);
+  const [openModal, setOpenModal] = useState(false);
+  const [target, setTarget] = useState(targets[0]);
 
   const dialogContentProps = {
     type: DialogType.normal,
@@ -33,6 +36,12 @@ export function TargetTable({ system }: TableTargetProps): JSX.Element {
     <>
       <div data-is-scrollable={true}>
         <div className={`s-Grid-col ms-sm9 ms-xl9 ${classNames.table}`}>
+          <TargetEventsModal
+            target={target}
+            onDismiss={() => { setOpenModal(false); }}
+            isOpen={openModal}
+            isBlocking={false}
+          />
           <DetailsList
             items={[...targets]}
             disableSelectionZone={true}
@@ -48,7 +57,13 @@ export function TargetTable({ system }: TableTargetProps): JSX.Element {
                 minWidth: 200,
                 maxWidth: 300,
                 data: 'string',
-                onRender: (item) => (<span>{item.name}</span>),
+                onRender: (item) => {
+                  const onClick = () => {
+                    setTarget(item);
+                    setOpenModal(true);
+                  };
+                  return (<span onClick={onClick} onKeyDown={onClick}>{item.name}</span>);
+                },
               },
               {
                 key: 'column2',
