@@ -6,9 +6,11 @@ import {
 import {
   SystemTargetsQueryTypes,
   useTargetsFragment,
+  TargetsFragmentTypes,
 } from '@umk-stat/statistic-client-relay';
-import { CreateTargetDialog, TargetEventsModal } from '@umk-stat/statistic-client-modals';
+import { CreateTargetDialog, DeleteTargetDialog, TargetEventsModal } from '@umk-stat/statistic-client-modals';
 import 'office-ui-fabric-react/dist/css/fabric.css';
+import { Mutable } from '../dynamicLogs';
 
 export type TableTargetProps = {
   system: NonNullable<SystemTargetsQueryTypes.SystemTargetsQueryResponse['system']>,
@@ -16,20 +18,28 @@ export type TableTargetProps = {
 
 export function TargetTable({ system }: TableTargetProps): JSX.Element {
   const { targets } = useTargetsFragment(system);
-
   const classNames = mergeStyleSets({
     table: {
       margin: '20px',
     },
+    button: {
+      'margin-left': '100px',
+    },
   });
 
   const [dialogHidden, setDialogHidden] = useState(true);
+  const [modalHidden, setModalHidden] = useState(true);
+  const [removableTarget, setRemovableTarget] = useState<{ id: string, name: string }>();
   const [openModal, setOpenModal] = useState(false);
   const [target, setTarget] = useState(targets[0]);
-
   const dialogContentProps = {
     type: DialogType.normal,
     title: 'Добавить цель',
+  };
+
+  const dialogModalProps = {
+    type: DialogType.normal,
+    title: 'Вы уверены, что хотите удалить цель',
   };
 
   return (
@@ -43,7 +53,7 @@ export function TargetTable({ system }: TableTargetProps): JSX.Element {
             isBlocking={false}
           />
           <DetailsList
-            items={[...targets]}
+            items={targets as Mutable<typeof targets>}
             disableSelectionZone={true}
             compact={true}
             checkboxVisibility={CheckboxVisibility.hidden}
@@ -73,7 +83,19 @@ export function TargetTable({ system }: TableTargetProps): JSX.Element {
                 minWidth: 200,
                 maxWidth: 300,
                 data: 'string',
-                onRender: (item) => (<span>{0}</span>),
+                onRender: (item: TargetsFragmentTypes.TargetsFragment['targets'][0]) => (
+                  <div>
+                    <span>{0}</span>
+                    <DefaultButton
+                      className={classNames.button}
+                      text="Удалить цель"
+                      onClick={() => {
+                        setRemovableTarget({ id: item.id, name: item.name });
+                        setModalHidden(false);
+                      }}
+                    />
+                  </div>
+                ),
               },
             ]}
           />
@@ -84,6 +106,19 @@ export function TargetTable({ system }: TableTargetProps): JSX.Element {
             onDismiss={() => setDialogHidden(true)}
             systemID={system.id}
           />
+          {removableTarget && (
+            <DeleteTargetDialog
+              dialogContentProps={dialogModalProps}
+              hidden={modalHidden}
+              onDismiss={() => {
+                setModalHidden(true);
+                setRemovableTarget(undefined);
+              }}
+              targetId={removableTarget.id}
+              systemId={system.id}
+              targetName={removableTarget.name}
+            />
+          )}
         </div>
       </div>
     </>
