@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import {
   DetailsList, CheckboxVisibility, mergeStyleSets, DefaultButton, DialogType,
+  CommandBar, ICommandBarItemProps,
 } from '@fluentui/react';
 import {
   SystemTargetsQueryTypes,
@@ -42,9 +43,19 @@ export function TargetTable({ system }: TableTargetProps): JSX.Element {
     title: 'Вы уверены, что хотите удалить цель',
   };
 
+  const overflowItems: ICommandBarItemProps[] = [
+    {
+      key: 'rename', text: 'Добавить цель', onClick: () => setDialogHidden(false), iconProps: { iconName: 'Edit' },
+    },
+  ];
+
   return (
     <>
       <div data-is-scrollable={true}>
+        <CommandBar
+          items={[]}
+          overflowItems={overflowItems}
+        />
         <div className={`s-Grid-col ms-sm9 ms-xl9 ${classNames.table}`}>
           <TargetEventsModal
             target={target}
@@ -99,7 +110,6 @@ export function TargetTable({ system }: TableTargetProps): JSX.Element {
               },
             ]}
           />
-          <DefaultButton secondaryText="Opens the Sample Dialog" onClick={() => setDialogHidden(false)} text="Добавить цель" />
           <CreateTargetDialog
             dialogContentProps={dialogContentProps}
             hidden={dialogHidden}
