@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useState } from 'react';
 import {
   DetailsList, CheckboxVisibility, mergeStyleSets, DefaultButton, DialogType,
@@ -7,7 +8,7 @@ import {
   useTargetsFragment,
   TargetsFragmentTypes,
 } from '@umk-stat/statistic-client-relay';
-import { CreateTargetDialog, DeleteTargetDialog } from '@umk-stat/statistic-client-modals';
+import { CreateTargetDialog, DeleteTargetDialog, TargetEventsModal } from '@umk-stat/statistic-client-modals';
 import 'office-ui-fabric-react/dist/css/fabric.css';
 import { Mutable } from '../dynamicLogs';
 
@@ -29,6 +30,8 @@ export function TargetTable({ system }: TableTargetProps): JSX.Element {
   const [dialogHidden, setDialogHidden] = useState(true);
   const [modalHidden, setModalHidden] = useState(true);
   const [removableTarget, setRemovableTarget] = useState<{ id: string, name: string }>();
+  const [openModal, setOpenModal] = useState(false);
+  const [target, setTarget] = useState(targets[0]);
   const dialogContentProps = {
     type: DialogType.normal,
     title: 'Добавить цель',
@@ -43,6 +46,12 @@ export function TargetTable({ system }: TableTargetProps): JSX.Element {
     <>
       <div data-is-scrollable={true}>
         <div className={`s-Grid-col ms-sm9 ms-xl9 ${classNames.table}`}>
+          <TargetEventsModal
+            target={target}
+            onDismiss={() => { setOpenModal(false); }}
+            isOpen={openModal}
+            isBlocking={false}
+          />
           <DetailsList
             items={targets as Mutable<typeof targets>}
             disableSelectionZone={true}
@@ -58,7 +67,13 @@ export function TargetTable({ system }: TableTargetProps): JSX.Element {
                 minWidth: 200,
                 maxWidth: 300,
                 data: 'string',
-                onRender: (item) => (<span>{item.name}</span>),
+                onRender: (item) => {
+                  const onClick = () => {
+                    setTarget(item);
+                    setOpenModal(true);
+                  };
+                  return (<span onClick={onClick} onKeyDown={onClick}>{item.name}</span>);
+                },
               },
               {
                 key: 'column2',
