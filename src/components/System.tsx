@@ -1,12 +1,21 @@
 import React, { useState } from 'react';
 import { initializeIcons } from '@uifabric/icons';
-import { Dropdown, IDropdownOption } from '@fluentui/react';
+import { Dropdown, IDropdownOption, mergeStyleSets } from '@fluentui/react';
 import { useSystems } from '@umk-stat/statistic-client-relay';
 import { Menu } from './Menu';
 
 export type SystemProps = {
     systemId: string;
 };
+
+const classNames = mergeStyleSets({
+    header: {
+        backgroundColor: '#0078D4',
+        color: 'white',
+        lineHeight: '50px',
+        padding: '0 25px',
+    },
+});
 
 export function System(): JSX.Element {
     initializeIcons();
@@ -26,6 +35,7 @@ export function System(): JSX.Element {
     }));
     return (
         <div>
+            <header className={`${classNames.header}`}>Статистика</header>
             <Dropdown options={options} onChange={onChange} placeholder="Выберите систему" defaultSelectedKey={systemId} />
             <Menu systemId={systemId} />
         </div>

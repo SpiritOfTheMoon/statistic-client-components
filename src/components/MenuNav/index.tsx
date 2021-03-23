@@ -40,6 +40,7 @@ const navigationStyles = {
     border: '1px solid #eee',
     overflowY: 'auto',
     paddingTop: '1vh',
+    marginRight: '20px',
   },
 };
 

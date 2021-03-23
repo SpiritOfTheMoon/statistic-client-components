@@ -2,14 +2,13 @@
 import React, { useState } from 'react';
 import {
   DetailsList, CheckboxVisibility, mergeStyleSets, DefaultButton, DialogType,
-  CommandBar, ICommandBarItemProps,
 } from '@fluentui/react';
 import {
   SystemTargetsQueryTypes,
   useTargetsFragment,
   TargetsFragmentTypes,
 } from '@umk-stat/statistic-client-relay';
-import { CreateTargetDialog, DeleteTargetDialog, TargetEventsModal } from '@umk-stat/statistic-client-modals';
+import { DeleteTargetDialog, TargetEventsModal } from '@umk-stat/statistic-client-modals';
 import 'office-ui-fabric-react/dist/css/fabric.css';
 import { Mutable } from '../dynamicLogs';
 
@@ -21,42 +20,27 @@ export function TargetTable({ system }: TableTargetProps): JSX.Element {
   const { targets } = useTargetsFragment(system);
   const classNames = mergeStyleSets({
     table: {
-      margin: '20px',
+      'padding-right': '30px',
     },
     button: {
       'margin-left': '100px',
     },
   });
 
-  const [dialogHidden, setDialogHidden] = useState(true);
   const [modalHidden, setModalHidden] = useState(true);
   const [removableTarget, setRemovableTarget] = useState<{ id: string, name: string }>();
   const [openModal, setOpenModal] = useState(false);
   const [target, setTarget] = useState(targets[0]);
-  const dialogContentProps = {
-    type: DialogType.normal,
-    title: 'Добавить цель',
-  };
 
   const dialogModalProps = {
     type: DialogType.normal,
     title: 'Вы уверены, что хотите удалить цель',
   };
 
-  const overflowItems: ICommandBarItemProps[] = [
-    {
-      key: 'rename', text: 'Добавить цель', onClick: () => setDialogHidden(false), iconProps: { iconName: 'Edit' },
-    },
-  ];
-
   return (
     <>
       <div data-is-scrollable={true}>
-        <CommandBar
-          items={[]}
-          overflowItems={overflowItems}
-        />
-        <div className={`s-Grid-col ms-sm9 ms-xl9 ${classNames.table}`}>
+        <div className={`ms-Grid-row ${classNames.table}`}>
           <TargetEventsModal
             target={target}
             onDismiss={() => { setOpenModal(false); }}
@@ -109,12 +93,6 @@ export function TargetTable({ system }: TableTargetProps): JSX.Element {
                 ),
               },
             ]}
-          />
-          <CreateTargetDialog
-            dialogContentProps={dialogContentProps}
-            hidden={dialogHidden}
-            onDismiss={() => setDialogHidden(true)}
-            systemID={system.id}
           />
           {removableTarget && (
             <DeleteTargetDialog

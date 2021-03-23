@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import {
-  Pivot, PivotItem, DefaultButton, Layer, Panel, IPanelStyleProps, IPanelStyles, PanelType, CommandBar,
-  Customizer, IconButton, FontWeights, IButtonStyles, ICommandBarItemProps,
+  Pivot, PivotItem,
+  CommandBar, ICommandBarItemProps, ICommandBarStyles,
+  DialogType,
 } from '@fluentui/react';
 import {
   BrowserRouter as Router, Route, Switch, Redirect, Link,
 } from 'react-router-dom';
-import { AnimationClassNames, mergeStyles, getTheme } from 'office-ui-fabric-react/lib/Styling';
 import 'office-ui-fabric-react/dist/css/fabric.css';
 
 import { ResultTypeReport } from './reports/resultType/ResultTypeReport';
@@ -14,6 +14,7 @@ import { TableLogsReport } from './reports/tableLogs/TableLogsReport';
 import { DynamicLogsReport } from './reports/dynamicLogs/DynamicLogsReport';
 import { Target } from './reports/target/Target';
 import { MenuNav, KeyMenu, MenuHeaderTexts } from './MenuNav';
+import { MenuCommandBar } from './MenuCommandBar';
 
 export type MenuProps = {
   systemId: string;
@@ -46,37 +47,19 @@ const BackendMenu = ({ systemId }: MenuProps) => (
 );
 
 const FrontendMenu = ({ systemId }: MenuProps) => (
-  <Pivot>
-    <PivotItem key={KeyMenu.TargetKey} headerText="Цели">
-      <React.Suspense fallback="цели загружаются">
-        <Target systemId={systemId} />
-      </React.Suspense>
-    </PivotItem>
-  </Pivot>
+  <>
+    <MenuCommandBar systemId={systemId} />
+    <Pivot>
+      <PivotItem key={KeyMenu.TargetKey} headerText="Цели">
+        <React.Suspense fallback="цели загружаются">
+          <Target systemId={systemId} />
+        </React.Suspense>
+      </PivotItem>
+    </Pivot>
+  </>
 );
 
-const theme = getTheme();
-const contentClass = mergeStyles([
-  {
-    backgroundColor: theme.palette.themePrimary,
-    color: 'white',
-    lineHeight: '50px',
-    padding: '0 20px',
-  },
-  AnimationClassNames.scaleUpIn100,
-]);
-
-const iconStyles: IButtonStyles = {
-  root: {
-    color: 'white',
-    fontSize: 16,
-    fontWeight: FontWeights.regular,
-  },
-};
-
 export function Menu({ systemId }: MenuProps): JSX.Element {
-  const [panelOpen, setPanelOpen] = useState(false);
-
   return (
     <>
       <Router>
