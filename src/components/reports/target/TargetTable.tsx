@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import {
   DetailsList, CheckboxVisibility, mergeStyleSets, DefaultButton, DialogType,
+  DetailsListLayoutMode, SelectionMode, IconButton,
 } from '@fluentui/react';
 import {
   SystemTargetsQueryTypes,
@@ -23,7 +24,11 @@ export function TargetTable({ system }: TableTargetProps): JSX.Element {
       'padding-right': '30px',
     },
     button: {
-      'margin-left': '100px',
+      // 'margin-left': '100px',
+    },
+    rowContent: {
+      color: 'black',
+      'font-size': '14px',
     },
   });
 
@@ -50,24 +55,32 @@ export function TargetTable({ system }: TableTargetProps): JSX.Element {
           <DetailsList
             items={targets as Mutable<typeof targets>}
             disableSelectionZone={true}
-            compact={true}
+            compact={false}
             checkboxVisibility={CheckboxVisibility.hidden}
-
+            selectionMode={0}
             columns={[
               {
                 key: 'column1',
-                name: 'Название цели',
+                name: 'Название',
                 className: 'CellId',
                 fieldName: 'target_name',
                 minWidth: 200,
-                maxWidth: 300,
                 data: 'string',
+                isPadded: true,
                 onRender: (item) => {
                   const onClick = () => {
                     setTarget(item);
                     setOpenModal(true);
                   };
-                  return (<span onClick={onClick} onKeyDown={onClick}>{item.name}</span>);
+                  return (
+                    <div
+                      className={classNames.rowContent}
+                      onClick={onClick}
+                      onKeyDown={onClick}
+                    >
+                      {item.name}
+                    </div>
+                  );
                 },
               },
               {
@@ -78,12 +91,26 @@ export function TargetTable({ system }: TableTargetProps): JSX.Element {
                 minWidth: 200,
                 maxWidth: 300,
                 data: 'string',
+                onRender: (item) => (
+                  <div className={classNames.rowContent}>{0}</div>
+                ),
+              },
+              {
+                key: 'column3',
+                name: '',
+                className: 'CellId',
+                fieldName: 'target_delete',
+                minWidth: 50,
+                maxWidth: 100,
+                data: 'string',
                 onRender: (item: TargetsFragmentTypes.TargetsFragment['targets'][0]) => (
                   <div>
-                    <span>{0}</span>
-                    <DefaultButton
+                    <IconButton
+                      iconProps={
+                        { iconName: 'Delete' }
+                      }
                       className={classNames.button}
-                      text="Удалить цель"
+                      title="Удалить цель"
                       onClick={() => {
                         setRemovableTarget({ id: item.id, name: item.name });
                         setModalHidden(false);

@@ -39,8 +39,9 @@ const navigationStyles = {
     boxSizing: 'border-box',
     border: '1px solid #eee',
     overflowY: 'auto',
-    paddingTop: '1vh',
+    paddingTop: '0',
     marginRight: '20px',
+    marginLeft: '-8px',
   },
 };
 

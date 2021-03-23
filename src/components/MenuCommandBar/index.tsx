@@ -8,8 +8,8 @@ import { CreateTargetDialog } from '@umk-stat/statistic-client-modals';
 const commandBarStyles: ICommandBarStyles = {
   root: {
     border: '1px solid #eee',
-    marginLeft: '-28px',
-    paddingLeft: '28px',
+    marginLeft: '-29px',
+    paddingLeft: '29px',
   },
 };
 
