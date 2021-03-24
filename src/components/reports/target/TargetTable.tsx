@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useState } from 'react';
 import {
-  DetailsList, CheckboxVisibility, mergeStyleSets, DefaultButton, DialogType,
-  DetailsListLayoutMode, SelectionMode, IconButton,
+  DetailsList, CheckboxVisibility, mergeStyleSets, DialogType,
+  IconButton,
 } from '@fluentui/react';
 import {
   SystemTargetsQueryTypes,
@@ -21,7 +21,7 @@ export function TargetTable({ system }: TableTargetProps): JSX.Element {
   const { targets } = useTargetsFragment(system);
   const classNames = mergeStyleSets({
     table: {
-      'padding-right': '30px',
+      margin: 'auto',
     },
     button: {
       // 'margin-left': '100px',
@@ -45,7 +45,7 @@ export function TargetTable({ system }: TableTargetProps): JSX.Element {
   return (
     <>
       <div data-is-scrollable={true}>
-        <div className={`ms-Grid-row ${classNames.table}`}>
+        <div className={`s-Grid-col ms-sm9 ms-xl9 ${classNames.table}`}>
           <TargetEventsModal
             target={target}
             onDismiss={() => { setOpenModal(false); }}

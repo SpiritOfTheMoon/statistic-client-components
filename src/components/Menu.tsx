@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   Pivot, PivotItem,
   Breadcrumb, IBreadcrumbItem,
 } from '@fluentui/react';
 import {
-  BrowserRouter as Router, Route, Switch, Redirect, Link,
+  BrowserRouter as Router, Route, Switch, Redirect,
 } from 'react-router-dom';
 import 'office-ui-fabric-react/dist/css/fabric.css';
 
@@ -20,34 +20,25 @@ export type MenuProps = {
 };
 
 const BackendMenu = ({ systemId }: MenuProps) => {
-  const [backendBreadCrumbItems, setBackendBreadCrumbItems] = useState([
-    {
-      text: KeyMenu.Backend, key: MenuHeaderTexts.Backend,
-    },
-    {
-      text: MenuHeaderTexts.Dynamic as string,
-      key: MenuHeaderTexts.Dynamic as string,
-      isCurrentItem: true,
-    },
-  ]);
+  const backendBreadCrumbFirtsItem: IBreadcrumbItem = {
+    text: KeyMenu.Backend, key: KeyMenu.Backend,
+  };
 
-  const handleChangePivotItem = (headerText: string | undefined) => {
+  const [backendBreadCrumbLastItem, setBackendBreadCrumbLastItem] = useState({
+      text: MenuHeaderTexts.Dynamic, key: MenuHeaderTexts.Dynamic, isCurrentItem: true,
+  } as IBreadcrumbItem);
+
+  const handleSwitchingPivotItem = (headerText: string | undefined) => {
     if (!headerText) return;
-    setBackendBreadCrumbItems([
-      backendBreadCrumbItems[0],
-      {
+    setBackendBreadCrumbLastItem({
         text: headerText, key: headerText, isCurrentItem: true,
-      },
-    ]);
+    } as IBreadcrumbItem);
   };
 
   return (
     <>
-      <Breadcrumb
-        items={backendBreadCrumbItems}
-        maxDisplayedItems={10}
-      />
-      <Pivot onLinkClick={(item: PivotItem | undefined) => handleChangePivotItem(item?.props?.headerText)}>
+      <Breadcrumb items={[backendBreadCrumbFirtsItem, backendBreadCrumbLastItem]} />
+      <Pivot onLinkClick={(item: PivotItem | undefined) => handleSwitchingPivotItem(item?.props?.headerText)}>
         <PivotItem key={KeyMenu.Dynamic} headerText={MenuHeaderTexts.Dynamic}>
           <React.Suspense fallback="отчет...">
             <DynamicLogsReport systemId={systemId} />
@@ -75,35 +66,26 @@ const BackendMenu = ({ systemId }: MenuProps) => {
 };
 
 const FrontendMenu = ({ systemId }: MenuProps) => {
-  const [frontendBreadCrumbItems, setFrontendBreadCrumbItems] = useState([
-    {
-      text: KeyMenu.Frontend, key: KeyMenu.Frontend,
-    },
-    {
-      text: MenuHeaderTexts.TargetKey as string,
-      key: MenuHeaderTexts.TargetKey as string,
-      isCurrentItem: true,
-    },
-  ]);
+  const frontendBreadCrumbFirtsItem: IBreadcrumbItem = {
+    text: KeyMenu.Frontend, key: KeyMenu.Frontend,
+  };
 
-  const handleChangePivotItem = (headerText: string | undefined) => {
+  const [frontendBreadCrumbLastItem, setFrontendBreadCrumbLastItem] = useState({
+      text: MenuHeaderTexts.TargetKey, key: MenuHeaderTexts.TargetKey, isCurrentItem: true,
+  } as IBreadcrumbItem);
+
+  const handleSwitchingPivotItem = (headerText: string | undefined) => {
     if (!headerText) return;
-    setFrontendBreadCrumbItems([
-      frontendBreadCrumbItems[0],
-      {
+    setFrontendBreadCrumbLastItem({
         text: headerText, key: headerText, isCurrentItem: true,
-      },
-    ]);
+    } as IBreadcrumbItem);
   };
 
   return (
     <>
       <MenuCommandBar systemId={systemId} />
-      <Breadcrumb
-        items={frontendBreadCrumbItems}
-        maxDisplayedItems={10}
-      />
-      <Pivot onLinkClick={(item: PivotItem | undefined) => handleChangePivotItem(item?.props?.headerText)}>
+      <Breadcrumb items={[frontendBreadCrumbFirtsItem, frontendBreadCrumbLastItem]} />
+      <Pivot onLinkClick={(item: PivotItem | undefined) => handleSwitchingPivotItem(item?.props?.headerText)}>
         <PivotItem key={KeyMenu.TargetKey} headerText="Цели">
           <React.Suspense fallback="цели загружаются">
             <Target systemId={systemId} />

@@ -1,10 +1,6 @@
 import React from 'react';
-import {
-  withRouter,
-} from 'react-router-dom';
-import {
-  Nav, INavStyles,
-} from '@fluentui/react';
+import { withRouter } from 'react-router-dom';
+import { Nav, INavStyles } from '@fluentui/react';
 
 export enum MenuHeaderTexts {
   Frontend = 'Frontend',
@@ -33,7 +29,7 @@ export enum KeyMenu {
 
 }
 
-const navigationStyles = {
+const navigationStyles: Partial<INavStyles> = {
   root: {
     height: '100vh',
     boxSizing: 'border-box',
