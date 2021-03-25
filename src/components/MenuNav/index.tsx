@@ -53,48 +53,44 @@ export const MenuNav = withRouter(({ history }) => (
         links: [
           {
             name: KeyMenu.Frontend,
-            url: `/${KeyMenu.Frontend}`,
+            url: `/${KeyMenu.Frontend}?key=${KeyMenu.TargetKey}&text=${MenuHeaderTexts.TargetKey}`,
             expandAriaLabel: 'Expand Home section',
             collapseAriaLabel: 'Collapse Home section',
             links: [
               {
                 name: MenuHeaderTexts.TargetKey,
-                url: `/${KeyMenu.Frontend}/${KeyMenu.TargetKey}`,
+                url: `/${KeyMenu.Frontend}?key=${KeyMenu.TargetKey}&text=${MenuHeaderTexts.TargetKey}`,
                 key: KeyMenu.TargetKey,
-                disabled: true,
               },
             ],
             isExpanded: true,
           },
           {
             name: KeyMenu.Backend,
-            url: `/${KeyMenu.Backend}`,
+            url: `/${KeyMenu.Backend}?key=${KeyMenu.Dynamic}&text=${MenuHeaderTexts.Dynamic}`,
             expandAriaLabel: 'Expand Home section',
             collapseAriaLabel: 'Collapse Home section',
             links: [
               {
                 name: MenuHeaderTexts.Dynamic,
-                url: `/${KeyMenu.Backend}/${KeyMenu.Dynamic}`,
+                url: `/${KeyMenu.Backend}?key=${KeyMenu.Dynamic}&text=${MenuHeaderTexts.Dynamic}`,
                 key: KeyMenu.Dynamic,
-                disabled: true,
               },
               {
                 name: MenuHeaderTexts.Table,
-                url: `/${KeyMenu.Backend}/${KeyMenu.Table}`,
+                url: `/${KeyMenu.Backend}?key=${KeyMenu.Table}&text=${MenuHeaderTexts.Table}`,
                 key: KeyMenu.Table,
-                disabled: true,
               },
               {
                 name: MenuHeaderTexts.ResultType,
-                url: `/${KeyMenu.Backend}/${KeyMenu.ResultType}`,
+                url: `/${KeyMenu.Backend}?key=${KeyMenu.ResultType}&text=${MenuHeaderTexts.ResultType}`,
                 key: KeyMenu.ResultType,
-                disabled: true,
               },
               {
                 name: MenuHeaderTexts.ResultTypeInterval,
-                url: `/${KeyMenu.Backend}/${KeyMenu.ResultTypeInterval}`,
+                url:
+                  `/${KeyMenu.Backend}?key=${KeyMenu.ResultTypeInterval}&text=${MenuHeaderTexts.ResultTypeInterval}`,
                 key: KeyMenu.ResultTypeInterval,
-                disabled: true,
               },
             ],
             isExpanded: true,
