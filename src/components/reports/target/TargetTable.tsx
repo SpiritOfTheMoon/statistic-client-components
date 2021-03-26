@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import {
   DetailsList, CheckboxVisibility, mergeStyleSets, DialogType,
-  IconButton,
+  IconButton, DetailsListLayoutMode, ConstrainMode,
 } from '@fluentui/react';
 import {
   SystemTargetsQueryTypes,
@@ -48,16 +48,17 @@ export function TargetTable({ system }: TableTargetProps): JSX.Element {
         <div className={`s-Grid-col ms-sm9 ms-xl9 ${classNames.table}`}>
           <TargetEventsModal
             target={target}
+            targetId={target.id}
+            targetName={target.name}
             onDismiss={() => { setOpenModal(false); }}
             isOpen={openModal}
             isBlocking={false}
           />
           <DetailsList
             items={targets as Mutable<typeof targets>}
-            disableSelectionZone={true}
             compact={false}
             checkboxVisibility={CheckboxVisibility.hidden}
-            selectionMode={0}
+            constrainMode={ConstrainMode.unconstrained}
             columns={[
               {
                 key: 'column1',

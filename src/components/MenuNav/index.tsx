@@ -2,7 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { Nav, INavStyles } from '@fluentui/react';
 
-export enum MenuHeaderTexts {
+enum MenuHeaderTexts {
   Frontend = 'Frontend',
   Backend = 'Backend',
 
@@ -29,6 +29,19 @@ export enum KeyMenu {
 
 }
 
+export const MenuKeyHeaderMap: Map<KeyMenu, MenuHeaderTexts> = new Map([
+  [KeyMenu.Frontend, MenuHeaderTexts.Frontend],
+  [KeyMenu.Backend, MenuHeaderTexts.Backend],
+
+  [KeyMenu.TargetKey, MenuHeaderTexts.TargetKey],
+  [KeyMenu.Dynamic, MenuHeaderTexts.Dynamic],
+  [KeyMenu.Table, MenuHeaderTexts.Table],
+  [KeyMenu.AverageQuery, MenuHeaderTexts.AverageQuery],
+  [KeyMenu.AverageQueryInterval, MenuHeaderTexts.AverageQueryInterval],
+  [KeyMenu.ResultType, MenuHeaderTexts.ResultType],
+  [KeyMenu.ResultTypeInterval, MenuHeaderTexts.ResultTypeInterval],
+]);
+
 const navigationStyles: Partial<INavStyles> = {
   root: {
     height: '100vh',
@@ -53,13 +66,13 @@ export const MenuNav = withRouter(({ history }) => (
         links: [
           {
             name: KeyMenu.Frontend,
-            url: `/${KeyMenu.Frontend}?key=${KeyMenu.TargetKey}&text=${MenuHeaderTexts.TargetKey}`,
+            url: `/${KeyMenu.Frontend}/${KeyMenu.TargetKey}`,
             expandAriaLabel: 'Expand Home section',
             collapseAriaLabel: 'Collapse Home section',
             links: [
               {
                 name: MenuHeaderTexts.TargetKey,
-                url: `/${KeyMenu.Frontend}?key=${KeyMenu.TargetKey}&text=${MenuHeaderTexts.TargetKey}`,
+                url: `/${KeyMenu.Frontend}/${KeyMenu.TargetKey}`,
                 key: KeyMenu.TargetKey,
               },
             ],
@@ -67,29 +80,29 @@ export const MenuNav = withRouter(({ history }) => (
           },
           {
             name: KeyMenu.Backend,
-            url: `/${KeyMenu.Backend}?key=${KeyMenu.Dynamic}&text=${MenuHeaderTexts.Dynamic}`,
+            url: `/${KeyMenu.Backend}/${KeyMenu.Dynamic}`,
             expandAriaLabel: 'Expand Home section',
             collapseAriaLabel: 'Collapse Home section',
             links: [
               {
                 name: MenuHeaderTexts.Dynamic,
-                url: `/${KeyMenu.Backend}?key=${KeyMenu.Dynamic}&text=${MenuHeaderTexts.Dynamic}`,
+                url: `/${KeyMenu.Backend}/${KeyMenu.Dynamic}`,
                 key: KeyMenu.Dynamic,
               },
               {
                 name: MenuHeaderTexts.Table,
-                url: `/${KeyMenu.Backend}?key=${KeyMenu.Table}&text=${MenuHeaderTexts.Table}`,
+                url: `/${KeyMenu.Backend}/${KeyMenu.Table}`,
                 key: KeyMenu.Table,
               },
               {
                 name: MenuHeaderTexts.ResultType,
-                url: `/${KeyMenu.Backend}?key=${KeyMenu.ResultType}&text=${MenuHeaderTexts.ResultType}`,
+                url: `/${KeyMenu.Backend}/${KeyMenu.ResultType}`,
                 key: KeyMenu.ResultType,
               },
               {
                 name: MenuHeaderTexts.ResultTypeInterval,
                 url:
-                  `/${KeyMenu.Backend}?key=${KeyMenu.ResultTypeInterval}&text=${MenuHeaderTexts.ResultTypeInterval}`,
+                  `/${KeyMenu.Backend}/${KeyMenu.ResultTypeInterval}`,
                 key: KeyMenu.ResultTypeInterval,
               },
             ],
