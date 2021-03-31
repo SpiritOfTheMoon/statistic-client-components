@@ -93,11 +93,23 @@ export function TargetTable({ system }: TableTargetProps): JSX.Element {
                 maxWidth: 300,
                 data: 'string',
                 onRender: (item) => (
-                  <div className={classNames.rowContent}>{0}</div>
+                  <div className={classNames.rowContent}>{item.executionCount}</div>
                 ),
               },
               {
                 key: 'column3',
+                name: 'Пользователей',
+                className: 'CellId',
+                fieldName: 'target_users',
+                minWidth: 150,
+                maxWidth: 200,
+                data: 'string',
+                onRender: (item: TargetsFragmentTypes.TargetsFragment['targets'][0]) => (
+                  <div>{item.viewerCount}</div>
+                ),
+              },
+              {
+                key: 'column4',
                 name: '',
                 className: 'CellId',
                 fieldName: 'target_delete',

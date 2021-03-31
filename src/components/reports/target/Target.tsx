@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSystemTargetsQuery } from '@umk-stat/statistic-client-relay';
+import { useSystemTargetsQuery, useTargetExecutionCountSubscription } from '@umk-stat/statistic-client-relay';
 import { TargetTable } from './TargetTable';
 
 export type TargetProps = {
@@ -12,7 +12,11 @@ export function Target({ systemId } : TargetProps): JSX.Element {
     }, {
         systemId,
     });
-
+    useTargetExecutionCountSubscription({
+        variables: {
+            systemID: systemId,
+        },
+    });
     if (system === null) {
         throw new Error('Нет id системы для таблицы');
     }
