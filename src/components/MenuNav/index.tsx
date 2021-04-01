@@ -7,6 +7,7 @@ enum MenuHeaderTexts {
   Backend = 'Backend',
 
   TargetKey = 'Цели',
+  VisitorKey = 'Пользователи',
   Dynamic = 'Логи онлайн',
   Table = 'Таблица логов',
   AverageQuery = 'reportQueryAverage',
@@ -20,6 +21,7 @@ export enum KeyMenu {
   Backend = 'Backend',
 
   TargetKey = 'target',
+  VisitorKey = 'visitorsReport',
   Dynamic = 'dynamicTableLogs',
   Table = 'tableLogs',
   AverageQuery = 'reportQueryAverage',
@@ -34,6 +36,7 @@ export const MenuKeyHeaderMap: Map<KeyMenu, MenuHeaderTexts> = new Map([
   [KeyMenu.Backend, MenuHeaderTexts.Backend],
 
   [KeyMenu.TargetKey, MenuHeaderTexts.TargetKey],
+  [KeyMenu.VisitorKey, MenuHeaderTexts.VisitorKey],
   [KeyMenu.Dynamic, MenuHeaderTexts.Dynamic],
   [KeyMenu.Table, MenuHeaderTexts.Table],
   [KeyMenu.AverageQuery, MenuHeaderTexts.AverageQuery],
@@ -74,6 +77,11 @@ export const MenuNav = withRouter(({ history }) => (
                 name: MenuHeaderTexts.TargetKey,
                 url: `/${KeyMenu.Frontend}/${KeyMenu.TargetKey}`,
                 key: KeyMenu.TargetKey,
+              },
+              {
+                name: MenuHeaderTexts.VisitorKey,
+                url: `/${KeyMenu.Frontend}/${KeyMenu.VisitorKey}`,
+                key: KeyMenu.VisitorKey,
               },
             ],
             isExpanded: true,
