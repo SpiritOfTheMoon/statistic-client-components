@@ -30,7 +30,7 @@ export function ViewersReport({ viewers }: ViewersTableProps): JSX.Element {
   const View = ViewObject[viewType];
 
   const onRenderItemStyles = {
-    root: { padding: '10px' },
+    root: { padding: '10px', margin: '10px' },
   };
 
   const onRenderOverflowButtonStyles = {
@@ -61,6 +61,22 @@ export function ViewersReport({ viewers }: ViewersTableProps): JSX.Element {
       menuProps={{ items: overflowItems! }}
     />
   );
+
+  const viewersData = viewers.reduce((accum, cur) => {
+    if (cur.compInfo) {
+      const { platform, screenResolution } = JSON.parse(cur.compInfo);
+      const { userInfo } = cur;
+      const viewerKey = `${platform}_${screenResolution.join('x')}_${userInfo}`;
+      const existedValue = accum.findIndex(([key]) => key === viewerKey);
+      if (existedValue === -1) {
+        accum.push([viewerKey, [cur]]);
+      } else {
+        accum[existedValue][1].push(cur);
+      }
+    }
+    return accum;
+  }, [] as Array<[string, (typeof viewers[0][])]>);
+
   return (
     <>
       <OverflowSet
@@ -93,7 +109,7 @@ export function ViewersReport({ viewers }: ViewersTableProps): JSX.Element {
         <View viewers={viewers} />
       </React.Suspense>
       <DetailsList
-        items={viewers as Mutable<typeof viewers>}
+        items={viewersData}
         checkboxVisibility={CheckboxVisibility.hidden}
         columns={[
           {
@@ -102,9 +118,9 @@ export function ViewersReport({ viewers }: ViewersTableProps): JSX.Element {
             minWidth: 200,
             maxWidth: 300,
             data: 'string',
-            onRender: (item: NonNullable<ViewerQueryTypes.ViewersQueryResponse['viewers']>[0]) => (
+            onRender: ([viewerKey, values]) => (
               <span>
-                {0}
+                {values.length}
               </span>
             ),
           },
@@ -114,9 +130,10 @@ export function ViewersReport({ viewers }: ViewersTableProps): JSX.Element {
             minWidth: 200,
             maxWidth: 300,
             data: 'string',
-            onRender: (item: NonNullable<ViewerQueryTypes.ViewersQueryResponse['viewers']>[0]) => {
-              const viewersData = JSON.parse(item.compInfo!);
-              return <span>{viewersData.screenResolution.join('x')}</span>;
+            onRender: ([viewerKey, values]) => {
+              const item = values[0];
+              const viewerData = JSON.parse(item.compInfo!);
+              return <span>{viewerData.screenResolution.join('x')}</span>;
             },
           },
           {
@@ -125,9 +142,10 @@ export function ViewersReport({ viewers }: ViewersTableProps): JSX.Element {
             minWidth: 200,
             maxWidth: 300,
             data: 'string',
-            onRender: (item: NonNullable<ViewerQueryTypes.ViewersQueryResponse['viewers']>[0]) => {
-              const viewersData = JSON.parse(item.compInfo!);
-              return <span>{viewersData.platform}</span>;
+            onRender: ([viewerKey, values]) => {
+              const item = values[0];
+              const viewerData = JSON.parse(item.compInfo!);
+              return <span>{viewerData.platform}</span>;
             },
           },
           {
@@ -136,8 +154,8 @@ export function ViewersReport({ viewers }: ViewersTableProps): JSX.Element {
             minWidth: 200,
             maxWidth: 300,
             data: 'string',
-            onRender: (item: NonNullable<ViewerQueryTypes.ViewersQueryResponse['viewers']>[0]) => (
-              <span>{item.userInfo}</span>
+            onRender: ([viewerKey, values]) => (
+              <span>{values[0].userInfo}</span>
             ),
           },
         ]}
