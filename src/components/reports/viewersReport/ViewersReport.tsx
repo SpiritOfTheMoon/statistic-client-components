@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { ViewerQueryTypes } from '@umk-stat/statistic-client-relay';
 import { DetailsList, CheckboxVisibility } from '@fluentui/react';
 import { Mutable } from '../dynamicLogs';
+import { ViewerReportPie } from './ViewerReportPie';
 
 export type ViewersTableProps = {
   viewers: NonNullable<ViewerQueryTypes.ViewersQueryResponse['viewers']>,
@@ -11,19 +12,20 @@ export type ViewersTableProps = {
 export function ViewersReport({ viewers }: ViewersTableProps): JSX.Element {
   return (
     <>
+      <ViewerReportPie viewers={viewers} />
       <DetailsList
         items={viewers as Mutable<typeof viewers>}
         checkboxVisibility={CheckboxVisibility.hidden}
         columns={[
           {
             key: 'column1',
-            name: 'Идентификатор',
+            name: 'Количество пользователей',
             minWidth: 200,
             maxWidth: 300,
             data: 'string',
             onRender: (item: NonNullable<ViewerQueryTypes.ViewersQueryResponse['viewers']>[0]) => (
               <span>
-                {item.identifier}
+                {0}
               </span>
             ),
           },
