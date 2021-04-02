@@ -1,5 +1,5 @@
 import React from 'react';
-import { useViewersQuery } from '@umk-stat/statistic-client-relay';
+import { useViewersQuery, useViewerGraphicsSubscriptionSubscription } from '@umk-stat/statistic-client-relay';
 import { ViewersReport } from './ViewersReport';
 
 export type VisitorProps = {
@@ -12,6 +12,9 @@ export function Viewer({ systemId }: VisitorProps): JSX.Element {
   }, {
     systemId,
   });
+  useViewerGraphicsSubscriptionSubscription({
+    variables: {}
+  })
   if (viewers === null) {
     throw new Error('пользователи не загружены');
   }
