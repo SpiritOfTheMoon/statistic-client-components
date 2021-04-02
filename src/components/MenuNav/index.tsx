@@ -13,6 +13,8 @@ enum MenuHeaderTexts {
   AverageQueryInterval = 'reportQueryAverageInterval',
   ResultType = 'Количество типов запросов за период',
   ResultTypeInterval = 'Количество типов запросов поинтервально за период',
+  Graphics = 'Графики',
+
 }
 
 export enum KeyMenu {
@@ -26,6 +28,7 @@ export enum KeyMenu {
   AverageQueryInterval = 'reportQueryAverageInterval',
   ResultType = 'reportResultType',
   ResultTypeInterval = 'reportResultTypeInterval',
+  Graphics = 'graphics',
 
 }
 
@@ -40,6 +43,7 @@ export const MenuKeyHeaderMap: Map<KeyMenu, MenuHeaderTexts> = new Map([
   [KeyMenu.AverageQueryInterval, MenuHeaderTexts.AverageQueryInterval],
   [KeyMenu.ResultType, MenuHeaderTexts.ResultType],
   [KeyMenu.ResultTypeInterval, MenuHeaderTexts.ResultTypeInterval],
+  [KeyMenu.Graphics, MenuHeaderTexts.Graphics],
 ]);
 
 const navigationStyles: Partial<INavStyles> = {
@@ -74,6 +78,11 @@ export const MenuNav = withRouter(({ history }) => (
                 name: MenuHeaderTexts.TargetKey,
                 url: `/${KeyMenu.Frontend}/${KeyMenu.TargetKey}`,
                 key: KeyMenu.TargetKey,
+              },
+              {
+                name: MenuHeaderTexts.Graphics,
+                url: `/${KeyMenu.Frontend}/${KeyMenu.Graphics}`,
+                key: KeyMenu.Graphics,
               },
             ],
             isExpanded: true,

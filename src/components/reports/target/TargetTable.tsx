@@ -92,7 +92,7 @@ export function TargetTable({ system }: TableTargetProps): JSX.Element {
                 minWidth: 200,
                 maxWidth: 300,
                 data: 'string',
-                onRender: (item) => (
+                onRender: (item: TargetsFragmentTypes.TargetsFragment['targets'][0]) => (
                   <div className={classNames.rowContent}>{item.executionCount}</div>
                 ),
               },
@@ -105,7 +105,7 @@ export function TargetTable({ system }: TableTargetProps): JSX.Element {
                 maxWidth: 200,
                 data: 'string',
                 onRender: (item: TargetsFragmentTypes.TargetsFragment['targets'][0]) => (
-                  <div>{item.viewerCount}</div>
+                  <div>{item.viewers.length}</div>
                 ),
               },
               {

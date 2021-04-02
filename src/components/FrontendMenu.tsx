@@ -43,7 +43,6 @@ export function FrontendMenu({ systemId, selectedKey, history }: FrontendMenuPro
 
   return (
     <>
-      <MenuCommandBar systemId={systemId} />
       <Breadcrumb items={frontendBreadCrumbItems} />
       <Pivot
         selectedKey={selectedKey}
@@ -51,10 +50,22 @@ export function FrontendMenu({ systemId, selectedKey, history }: FrontendMenuPro
           (item: PivotItem | undefined) => handleSwitchingPivotItem(item?.props?.headerText, item?.props?.itemKey)
         }
       >
-        <PivotItem key={KeyMenu.TargetKey} headerText={MenuKeyHeaderMap.get(KeyMenu.TargetKey)}>
+        <PivotItem
+          key={KeyMenu.TargetKey}
+          itemKey={KeyMenu.TargetKey}
+          headerText={MenuKeyHeaderMap.get(KeyMenu.TargetKey)}
+        >
+          <MenuCommandBar systemId={systemId} />
           <React.Suspense fallback="цели загружаются">
             <Target systemId={systemId} />
           </React.Suspense>
+        </PivotItem>
+        <PivotItem
+          key={KeyMenu.Graphics}
+          itemKey={KeyMenu.Graphics}
+          headerText={MenuKeyHeaderMap.get(KeyMenu.Graphics)}
+        >
+          <React.Suspense fallback="графики загружаются" />
         </PivotItem>
       </Pivot>
     </>
