@@ -1,7 +1,13 @@
 /* eslint-disable import/prefer-default-export */
 import React, { useState } from 'react';
 import { ViewerQueryTypes } from '@umk-stat/statistic-client-relay';
-import { DetailsList, CheckboxVisibility } from '@fluentui/react';
+import {
+  DetailsList,
+  CheckboxVisibility,
+  OverflowSet,
+  IOverflowSetItemProps,
+  CommandBarButton,
+} from '@fluentui/react';
 import { Mutable } from '../dynamicLogs';
 import { ViewerReportPie } from './ViewerReportPie';
 import { ViewerReportResolutionPie } from './ViewersReportResolutionPie';
@@ -11,10 +17,81 @@ export type ViewersTableProps = {
 };
 
 export function ViewersReport({ viewers }: ViewersTableProps): JSX.Element {
+  type ViewKeysType = 'platformPie' | 'resolutionPie' | 'default';
+
+  const [viewType, setViewType] = useState<ViewKeysType>('platformPie');
+
+  const ViewObject = {
+    default: '',
+    platformPie: ViewerReportPie,
+    resolutionPie: ViewerReportResolutionPie,
+  };
+
+  const View = ViewObject[viewType];
+
+  const onRenderItemStyles = {
+    root: { padding: '10px' },
+  };
+
+  const onRenderOverflowButtonStyles = {
+    root: { padding: '10px' },
+    menuIcon: { fontSize: '16px' },
+  };
+
+  const onRenderItem = (item: IOverflowSetItemProps): JSX.Element => (
+    <>
+      <CommandBarButton
+        role="menuitem"
+        aria-label={item.name}
+        styles={onRenderItemStyles}
+        iconProps={{ iconName: item.icon }}
+        onClick={item.onClick}
+      >
+        {item.name}
+      </CommandBarButton>
+    </>
+  );
+
+  const onRenderOverflowButton = (overflowItems: any[] | undefined): JSX.Element => (
+    <CommandBarButton
+      role="menuitem"
+      title="More items"
+      styles={onRenderOverflowButtonStyles}
+      menuIconProps={{ iconName: 'More' }}
+      menuProps={{ items: overflowItems! }}
+    />
+  );
   return (
     <>
-      <ViewerReportPie viewers={viewers} />
-      <ViewerReportResolutionPie viewers={viewers} />
+      <OverflowSet
+        onRenderItem={onRenderItem}
+        onRenderOverflowButton={onRenderOverflowButton}
+        role="menubar"
+        vertical={false}
+        items={[
+          {
+            key: 'item1',
+            icon: 'DonutChart',
+            title: 'Платформа',
+            name: 'Платформа',
+            onClick: () => {
+              setViewType('platformPie');
+            },
+          },
+          {
+            key: 'item2',
+            icon: 'DonutChart',
+            title: 'Разрешение',
+            name: 'Разрешение',
+            onClick: () => {
+              setViewType('resolutionPie');
+            },
+          },
+        ]}
+      />
+      <React.Suspense fallback="Применение новых опций....">
+        <View viewers={viewers} />
+      </React.Suspense>
       <DetailsList
         items={viewers as Mutable<typeof viewers>}
         checkboxVisibility={CheckboxVisibility.hidden}
