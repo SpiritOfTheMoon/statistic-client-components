@@ -13,8 +13,8 @@ export function Viewer({ systemId }: VisitorProps): JSX.Element {
     systemId,
   });
   useViewerGraphicsSubscriptionSubscription({
-    variables: {}
-  })
+    variables: {},
+  });
   if (viewers === null) {
     throw new Error('пользователи не загружены');
   }
