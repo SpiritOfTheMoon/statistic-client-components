@@ -6,6 +6,7 @@ import {
 import 'office-ui-fabric-react/dist/css/fabric.css';
 
 import { Target } from './reports/target/Target';
+import { Viewer } from './reports/viewersReport/Viewer';
 import { KeyMenu, MenuKeyHeaderMap } from './MenuNav';
 import { MenuCommandBar } from './MenuCommandBar';
 
@@ -55,17 +56,18 @@ export function FrontendMenu({ systemId, selectedKey, history }: FrontendMenuPro
           itemKey={KeyMenu.TargetKey}
           headerText={MenuKeyHeaderMap.get(KeyMenu.TargetKey)}
         >
-          <MenuCommandBar systemId={systemId} />
           <React.Suspense fallback="цели загружаются">
             <Target systemId={systemId} />
           </React.Suspense>
         </PivotItem>
         <PivotItem
-          key={KeyMenu.Graphics}
-          itemKey={KeyMenu.Graphics}
-          headerText={MenuKeyHeaderMap.get(KeyMenu.Graphics)}
+          key={KeyMenu.VisitorKey}
+          itemKey={KeyMenu.VisitorKey}
+          headerText={MenuKeyHeaderMap.get(KeyMenu.VisitorKey)}
         >
-          <React.Suspense fallback="графики загружаются" />
+          <React.Suspense fallback="пользователи загружаются">
+            <Viewer systemId={systemId} />
+          </React.Suspense>
         </PivotItem>
       </Pivot>
     </>
