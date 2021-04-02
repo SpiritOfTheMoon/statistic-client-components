@@ -1,5 +1,5 @@
 import React from 'react';
-import { Mutable, ViewerQueryTypes } from '@umk-stat/statistic-client-relay';
+import { ViewerQueryTypes } from '@umk-stat/statistic-client-relay';
 import { Pie } from '@vx/shape';
 import { Group } from '@vx/group';
 import { scaleOrdinal } from '@vx/scale';
@@ -18,7 +18,7 @@ export type ResultTypePieProps = {
   height?: number,
 };
 
-export function ViewerReportPie({
+export function ViewerReportResolutionPie({
   viewers,
   width = 1000,
   height = 500,
@@ -27,10 +27,11 @@ export function ViewerReportPie({
 }: ResultTypePieProps): JSX.Element {
   const pieData = viewers.reduce((accum, cur) => {
     if (cur.compInfo) {
-      const { platform } = JSON.parse(cur.compInfo);
-      const existedValue = accum.findIndex(([key]) => key === platform);
+      const { screenResolution } = JSON.parse(cur.compInfo);
+      const screenResul = screenResolution.join('x');
+      const existedValue = accum.findIndex(([key]) => key === screenResul);
       if (existedValue === -1) {
-        accum.push([platform, [cur.identifier]]);
+        accum.push([screenResul, [cur.identifier]]);
       } else {
         accum[existedValue][1].push(cur.identifier);
       }
@@ -38,11 +39,9 @@ export function ViewerReportPie({
     return accum;
   }, [] as Array<[string, string[]]>);
 
-  console.log(pieData);
-
   if (width && width < 10) return <></>;
   const getBrowserColor = scaleOrdinal({
-    domain: pieData.map(([platform]) => platform),
+    domain: pieData.map(([screenResolution]) => screenResolution),
     range: [
       'rgba(255,255,255,0.7)',
       'rgba(255,255,255,0.6)',
@@ -69,7 +68,7 @@ export function ViewerReportPie({
           data={
             pieData
           }
-          pieValue={([platform, identifiers]) => identifiers.length}
+          pieValue={([screenResolution, identifiers]) => identifiers.length}
           outerRadius={radius}
           innerRadius={radius - donutThickness}
           cornerRadius={3}
@@ -84,8 +83,8 @@ export function ViewerReportPie({
               getColor={(arc) => getBrowserColor(arc.data[0])}
               getVisibleValue={
                 (
-                  { data: [platform, identifiers] },
-                ) => `${platform}:${identifiers.length}`
+                  { data: [screenResolution, identifiers] },
+                ) => `${screenResolution}:${identifiers.length}`
               }
             />
           )}
